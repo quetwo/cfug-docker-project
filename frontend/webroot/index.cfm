@@ -30,7 +30,7 @@
             <tr>
                 <th>Name</th>
                 <th>Symbol</th>
-                <th>Price</th>
+                <th>Current Price</th>
                 <th>Difference</th>
                 <th>Last</th>
             </tr>
@@ -42,3 +42,5 @@
 
 </body>
 </html>
+
+<cfset ormReload()>

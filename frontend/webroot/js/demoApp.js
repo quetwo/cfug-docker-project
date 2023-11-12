@@ -16,17 +16,17 @@ function pageInitSuccess()
     tblStocks = new DataTable('#tblStocks',
         {
             paging: false,
-            drawCallback: function()
-                {
-                    $('.sparkline')
-                        .map(function() {
-                            return $('canvas', this).length ? null : this;
-                        })
-                        .sparkline('html', {
-                            type: 'line',
-                            width: '250px'
-                        })
-                },
+            ajax: '/rest/demo/stocks/',
+            drawCallback: function() {
+                $('.sparkline')
+                    .map(function() {
+                        return $('canvas', this).length ? null : this;
+                    })
+                    .sparkline('html', {
+                        type: 'line',
+                        width: '250px'
+                    })
+            },
             columns: [
                 {
                     data: 'name'
@@ -38,14 +38,21 @@ function pageInitSuccess()
                     data: null,
                     render: function(data, type, row, meta)
                     {
-                        return row.last[row.last.length - 1].toFixed(2);
+                        return row.prices[row.prices.length-1].price.toFixed(2);
                     }
                 },
                 {
                     data: null,
                     render: function(data, type, row, meta)
                     {
-                        var val = (row.last[row.last.length - 1] - row.last[row.last.length - 2]).toFixed(2);
+                        if (row.prices.length < 2)
+                        {
+                            val = 0;
+                            return type === 'display' ?
+                                '<span style="color:black">0.00</span>' :
+                                val;
+                        }
+                        var val = (row.prices[row.prices.length-1].price - row.prices[row.prices.length-2].price).toFixed(2);
                         var colour = val < 0 ? 'red' : 'green'
                         return type === 'display' ?
                             '<span style="color:' + colour + '">' + val + '</span>' :
@@ -53,13 +60,20 @@ function pageInitSuccess()
                     }
                 },
                 {
-                    data: 'last',
-                    render: function(data, type, row, meta) {
+                    data: 'prices',
+                    render: function(data, type, row, meta)
+                    {
+                        pricesLog = [];
+                        for (stockPriceID in data)
+                        {
+                            pricesLog.push(data[stockPriceID].price);
+                        }
                         return type === 'display' ?
-                            '<span class="sparkline">' + data.toString() + '</span>' :
+                            '<span class="sparkline">' + pricesLog.toString() + '</span>' :
                             data;
                     }
-                }]
+                }
+            ]
         });
 
 }

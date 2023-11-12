@@ -5,6 +5,7 @@ component persistent="true"
     property name="name" fieldtype="column" ormType="string";
     property name="symbol" fieldtype="column" ormType="string";
 
-    property name="lastPrices" fieldtype="one-to-many" cfc="stockPrice" fkcolumn="stockID" type="array";
+    property name="prices" fieldtype="one-to-many" cfc="stockPrice" fkcolumn="stockID"
+            type="array" orderby="timeCaptured asc" singularname="prices" cascade="all" remotingFetch="true";
 
 }
