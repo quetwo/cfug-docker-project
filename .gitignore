@@ -1,3 +1,4 @@
 /.idea/
 *.iml
-
+/proxy/logs/access.log
+/proxy/logs/traefik.log
