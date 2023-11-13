@@ -40,6 +40,14 @@ component
     function onApplicationStart()
     {
         RestInitApplication(expandPath('rest'), '/demo', false, server.system.environment.LUCEE_ADMIN_PASSWORD);
+        cfschedule(
+            action="update",
+            task="updateStockPrices",
+            operation="httprequest",
+            startDate="1/1/23",
+            startTime="12:00 AM",
+            url="http://localhost:8888/rest/demo/stocks/generate",
+            interval="10");
     }
 
     function onSessionStart()

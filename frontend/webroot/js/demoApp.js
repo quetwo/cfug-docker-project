@@ -27,6 +27,12 @@ function pageInitSuccess()
                         width: '250px'
                     })
             },
+            initComplete: function() {
+                let api = this.api();
+                setInterval(function() {
+                    api.ajax.reload();
+                }, 10000);
+            },
             columns: [
                 {
                     data: 'name'

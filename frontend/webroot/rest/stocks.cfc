@@ -12,4 +12,23 @@ component rest="true" restPath="/stocks"
         return myJSON;
     }
 
+    remote function generateNewStockPrices() httpMethod="GET" restPath="/generate"
+    {
+        myStocks = entityload("stock");
+        numberOfMoves = randRange(1,len(myStocks));
+        writeDump(var="Adding Entries for " & numberOfMoves & " stocks", output="console");
+        stockIndex = arrayNew();
+        for(i=1; i LTE len(myStocks); i++)
+        {
+            arrayAppend(stockIndex,i);
+        }
+        for(i=0; i LT numberOfMoves; i++)
+        {
+            randNum = randRange(1,len(stockIndex));
+            myStocks[stockIndex[randNum]].generateRandomPrice();
+            arrayDeleteAt(stockIndex,randNum);
+
+        }
+    }
+
 }
