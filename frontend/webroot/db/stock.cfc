@@ -28,4 +28,19 @@ component persistent="true"
         return true;
     }
 
+    public boolean function saveZeroStockPrice()
+    {
+        writeDump(var="Generating No-movement Price for " & this.getSymbol(), output="console", label="*****");
+        prices = this.getPrices();
+        lastPrice = prices[len(prices)].getPrice();
+
+        newPriceItem = entityNew("stockPrice");
+        newPriceItem.settimeCaptured(now());
+        newPriceItem.setPrice(lastPrice);
+        addPrice(newPriceItem);
+        ormFlush();
+
+        return true;
+    }
+
 }

@@ -1,6 +1,5 @@
 component rest="true" restPath="/stocks"
 {
-
     // Full path is GET https://<host>/rest/demo/stocks
     remote function getAllStocks() httpMethod="GET"
     {
@@ -27,7 +26,10 @@ component rest="true" restPath="/stocks"
             randNum = randRange(1,len(stockIndex));
             myStocks[stockIndex[randNum]].generateRandomPrice();
             arrayDeleteAt(stockIndex,randNum);
-
+        }
+        for(i=1; i LTE len(stockIndex); i++)
+        {
+            myStocks[stockIndex[i]].saveZeroStockPrice();
         }
     }
 

@@ -24,7 +24,7 @@ function pageInitSuccess()
                     })
                     .sparkline('html', {
                         type: 'line',
-                        width: '250px'
+                        width: '300px'
                     })
             },
             initComplete: function() {
@@ -67,6 +67,8 @@ function pageInitSuccess()
                 },
                 {
                     data: 'prices',
+                    orderable: false,
+                    searchable: false,
                     render: function(data, type, row, meta)
                     {
                         pricesLog = [];

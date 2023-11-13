@@ -25,14 +25,14 @@
 
     <div class="container">
 
-        <table class="table table-bordered" id="tblStocks">
+        <table class="table table-bordered table-striped" id="tblStocks">
             <thead>
             <tr>
                 <th>Name</th>
                 <th>Symbol</th>
                 <th>Current Price</th>
                 <th>Difference</th>
-                <th>Last</th>
+                <th>Activity</th>
             </tr>
             </thead>
         </table>
