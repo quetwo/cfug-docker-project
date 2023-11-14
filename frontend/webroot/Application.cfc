@@ -15,16 +15,6 @@ component
         , validate:false // default: false
     };
 
-    this.cache.connections["cacheRamCache"] =
-        {
-            class: 'lucee.runtime.cache.ram.RamCache'
-            , storage: false
-            , custom: {
-            "timeToIdleSeconds":"0",
-            "timeToLiveSeconds":"0"
-        }, default: 'object'
-    };
-
     this.ormenabled = true;
     this.ormsettings =
     {
